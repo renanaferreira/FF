@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+          integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <title>FF</title>
+    <script src="js/perfil.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#" style="font-family: 'Roboto Slab', serif;font-size:30px">F&F</a>
+            <ul class="navbar-nav" style="font-size: 20px">
+                <li class="nav-item">
+                    <a class="nav-link" href="interfaceUser.html">Pesquisa</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="mensagens.html">Mensagens</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contratos.html">Contratos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="avaliacoes.html">Avaliações</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav justify-content-end">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                        <i class="fas fa-user fa-2x"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="perfil.html">Perfil</a>
+                        <a class="dropdown-item" href="Contratos2.html">Trocar de modo</a>
+                        <a class="dropdown-item" href="#">Log Out</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container" style="margin-top: 20px" data-bind="with: perfil">
+        <div>ID: <span data-bind="text: id"></span></div>
+        <div>Nome: <span data-bind="text: nome"></span></div>
+        <div>Regime: <span data-bind="text: regime"></span></div>
+        <div>Area: <span data-bind="text: area"></span></div>
+        <div>Avaliacao: <span data-bind="text: avaliacao"></span></div>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Mudar</button>
+    </div>
+
+    <div class="modal " id="myModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title">Mandar mensagem a freelancer</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+
+                <div class="modal-body">
+                    <div class="input-group input-group-lg">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Regime</span>
+                        </div>
+                        <input type="text" class="form-control" id="regime1">
+                    </div>
+                    <div class="input-group input-group-lg">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Area</span>
+                        </div>
+                        <input type="text" class="form-control" id="area1">
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary"
+                            data-dismiss="modal" data-bind="click: mudar">Mudar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
