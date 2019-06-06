@@ -1,32 +1,27 @@
 $("document").ready(function () {
+    var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    console.log(currentUser);
     function viewModel() {
         var self = this;
 
-        self.perfil = ko.observable({id: '1', nome: 'pedro', regime: 'integral', area: 'cozinha', avaliacao: '3'});
+        self.perfil = ko.observable(currentUser);
 
         self.mudar = function (chat) {
-            var regime = $('#regime1').val();
-            var area = $('#area1').val();
-            var request = $.ajax({
-                url: "avaliacoes.html",
-                type: "POST",
-                data: {id : self.perfil.id, 'regime': regime, 'area': area},
-                dataType: "html"
-            });
-
-
-            request.done(function(msg) {
-                self.perfil.regime = regime;
-                self.perfil.area = area;
-                console.log(self.perfil.regime);
-                $('#regime1').val("");
-                $('#area1').val("");
-                alert("Perfil mudado. Espere um momento para as alterações serem feitas.");
-            });
-
-            request.fail(function(jqXHR, textStatus) {
-                alert("Houve um problema. Tente novamente");
-            });
+            currentUser['regime'] = $('#regime1').val();
+            currentUser['area'] = $('#area1').val();
+            localStorage.setItem("currentUser", JSON.stringify(currentUser));
+            self.perfil(currentUser);
+            var users = JSON.parse(localStorage.getItem("users") || "[]");
+            for(var i = 0;i < users.length;i++){
+                if(users[i]['id'] == currentUser['id']){
+                       users[i] = currentUser;
+                       break;
+                }
+            }
+            for(var i = 0;i < users.length;i++){
+                console.log(users[i]);
+            }
+            localStorage.setItem("users", JSON.stringify(users));
         };
 
 

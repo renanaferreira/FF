@@ -1,32 +1,29 @@
 $('document').ready(function(){
+    var users = JSON.parse(localStorage.getItem("users") || "[]");
+    var currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    console.log(currentUser);
+    var pesquisa = users;
+    for(var i = 0; i < pesquisa.length; i++){
+        if(pesquisa[i]['id'] == currentUser['id']){
+            pesquisa.splice(i,1);
+            break;
+        }
+
+    }
+    for(var i = 0; i < pesquisa.length; i++){
+        console.log(pesquisa[i]);
+    }
     function viewModel() {
         var self = this;
 
         self.freelancerCorrente = ko.observable({});
-        self.freelancers = ko.observableArray([
-            {'nome': 'Noé Elisabete Ferreiro'  , 'area': 'Programação', 'regime': '', 'avaliacao': '3', id:"12"},
-        ]);
+        self.freelancers = ko.observableArray(pesquisa);
 
         self.aceitar = function(freelancer) {
             var salario = $('#myModal2 #salario').val();
-            var inicio = $('#myModal2 #inicio').val();
-            var final = $('#myModal2 #final').val();
-            var request = $.ajax({
-                url: "avaliacoes.html",
-                type: "POST",
-                data: {id : self.freelancerCorrente.id, salario: salario, inicio: inicio, fim: final},
-                dataType: "html"
-            });
-
-
-            request.done(function(msg) {
-
-                alert("Proposta foi mandada");
-            });
-
-            request.fail(function(jqXHR, textStatus) {
-                alert("Houve um problema. Tente novamente");
-            });
+            var inicio = new Date($('#myModal2 #inicio').val()).toDateString();
+            var final = new Date($('#myModal2 #final').val()).toDateString();
+            console.log(final);
 
         };
 

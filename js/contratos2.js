@@ -1,62 +1,103 @@
 $('document').ready(function(){
+    var currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    var propostas = currentUser['propostasRecebidas'];
+    var contratos1 = [];
+    var contratos2 = [];
+    for(var i = 0;i < propostas.length;i++){
+        if(propostas[i]['status'] == 'Pendente'){
+            contratos1.push(propostas[i]);
+        }else{
+            contratos2.push(propostas[i]);
+        }
+    }
     function viewModel() {
         var self = this;
 
-        self.contratosPendentes = ko.observableArray([
-            {id: "",'nome': "Raimundo", 'salario': "10", 'inicio': '', 'fim': '','status':'Aceito'},
-            {id: "",'nome': "Marcio"  , 'salario': "20", 'inicio': '', 'fim': '','status':'Pendente'},
-            {id: "",'nome': "Carreta" , 'salario': "30", 'inicio': '', 'fim': '','status':'Recusado'},
-            {id: "",'nome': "ula"     , 'salario': "40", 'inicio': '', 'fim': '','status':''},
-            {id: "",'nome': "moana"   , 'salario': "50", 'inicio': '', 'fim': '','status':''}
-        ]);
-        self.contratos = ko.observableArray([
-            {id: "",'nome': "Raimundo", 'salario': "10", 'inicio': '', 'fim': '','status':'Aceito'},
-            {id: "",'nome': "Marcio"  , 'salario': "20", 'inicio': '', 'fim': '','status':'Pendente'},
-            {id: "",'nome': "Carreta" , 'salario': "30", 'inicio': '', 'fim': '','status':'Recusado'},
-            {id: "",'nome': "ula"     , 'salario': "40", 'inicio': '', 'fim': '','status':''},
-            {id: "",'nome': "moana"   , 'salario': "50", 'inicio': '', 'fim': '','status':''}
-        ]);
+        self.contratosPendentes = ko.observableArray(contratos1);
+        self.contratos = ko.observableArray(contratos2);
 
         self.aceitar = function (contrato) {
-            var request = $.ajax({
-                url: "avaliacoes.html",
-                type: "POST",
-                data: {id : contrato.id, proposta: '1'},
-                dataType: "html"
-            });
+            var users = JSON.parse(localStorage.getItem("users") || "[]");
+            for(var i = 0; i < users.length; i++){
+                for(var j = 0; j < users[i]['propostasMandadas'].length; j++){
+                    if(users[i]['propostasMandadas'][j]['id'] == contrato['id']){
+                        users[i]['propostasMandadas'][j]['status'] = "Aceito";
+                    }
+                }
+                for(var j = 0; j < users[i]['propostasRecebidas'].length; j++){
+                    if(users[i]['propostasRecebidas'][j]['id'] == contrato['id']){
+                        users[i]['propostasRecebidas'][j]['status'] = "Aceito";
+                    }
+                }
 
 
-            request.done(function(msg) {
-                contrato.status = 'Aceito';
-                self.contratos.push(contrato);
-                self.contratosPendentes.remove(contrato);
-                alert("Contrato aceito.");
-            });
+            }
+            for(var i = 0; i < users.length; i++){
+                if(users[i]['id'] == currentUser['id']){
+                    currentUser = users[i];
+                    break;
+                }
+            }
+            localStorage.setItem("users", JSON.stringify(users));
+            localStorage.setItem("currentUser", JSON.stringify(currentUser));
+            propostas = currentUser['propostasRecebidas'];
+            for(var i = 0;i < propostas.length;i++){
+                console.log(propostas[i]);
+            }
+            contratos1 = [];
+            contratos2 = [];
+            for(var i = 0;i < propostas.length;i++){
+                if(propostas[i]['status'] == 'Pendente'){
+                    contratos1.push(propostas[i]);
+                }else{
+                    contratos2.push(propostas[i]);
+                }
+            }
 
-            request.fail(function(jqXHR, textStatus) {
-                alert("Houve um problema. Tente novamente");
-            });
+            self.contratosPendentes.remove(contratos1);
+            self.contratos.push(contratos2);
         };
 
         self.recusar = function (contrato) {
-            var request = $.ajax({
-                url: "avaliacoes.html",
-                type: "POST",
-                data: {id : contrato.id, proposta: '2'},
-                dataType: "html"
-            });
+            var users = JSON.parse(localStorage.getItem("users") || "[]");
+            for(var i = 0; i < users.length; i++){
+                for(var j = 0; j < users[i]['propostasMandadas'].length; j++){
+                    if(users[i]['propostasMandadas'][j]['id'] == contrato['id']){
+                        users[i]['propostasMandadas'][j]['status'] = "Recusado";
+                    }
+                }
+                for(var j = 0; j < users[i]['propostasRecebidas'].length; j++){
+                    if(users[i]['propostasRecebidas'][j]['id'] == contrato['id']){
+                        users[i]['propostasRecebidas'][j]['status'] = "Recusado";
+                    }
+                }
 
 
-            request.done(function(msg) {
-                contrato.status = 'Recusado';
-                self.contratos.push(contrato);
-                self.contratosPendentes.remove(contrato);
-                alert("Contrato recusado.");
-            });
+            }
+            for(var i = 0; i < users.length; i++){
+                if(users[i]['id'] == currentUser['id']){
+                    currentUser = users[i];
+                    break;
+                }
+            }
+            localStorage.setItem("users", JSON.stringify(users));
+            localStorage.setItem("currentUser", JSON.stringify(currentUser));
+            propostas = currentUser['propostasRecebidas'];
+            for(var i = 0;i < propostas.length;i++){
+                console.log(propostas[i]);
+            }
+            contratos1 = [];
+            contratos2 = [];
+            for(var i = 0;i < propostas.length;i++){
+                if(propostas[i]['status'] == 'Pendente'){
+                    contratos1.push(propostas[i]);
+                }else{
+                    contratos2.push(propostas[i]);
+                }
+            }
 
-            request.fail(function(jqXHR, textStatus) {
-                alert("Houve um problema. Tente novamente");
-            });
+            self.contratosPendentes.remove(contratos1);
+            self.contratos.push(contratos2);
         };
 
 

@@ -1,3 +1,38 @@
+$('document').ready(function(){
+    var users = JSON.parse(localStorage.getItem("users") || "[]");
+    if(users.length == 0){
+        users.push({'id': 0, "nome": "Antonio Costa", "idade": 20, "genero": "masculino", "email": "antonio@hotmail.com",
+            "nTelemovel": 111111111, "password": "login", "regime": 'Parcial', 'area': 'geral', 'avaliacao': 1,
+            "propostasMandadas": [
+                {'id':'01','nome': 'Carina Almeida', 'salario': 100, 'inicio': '','fim': '','status':'Aceito'},
+                {'id':'02','nome': 'Alina Doces', 'salario': 200, 'inicio': '','fim': '','status':'Pendente'},
+            ],"propostasRecebidas": [
+                {'id':'10','nome': 'Carina Almeida', 'salario': 250, 'inicio': '','fim': '','status':'Pendente'},
+                {'id':'20','nome': 'Alina Doces', 'salario': 560, 'inicio': '','fim': '','status':'Aceito'}
+            ],'avaliacaoFeitaEmpregador':[
+                {'id':'01','nome': 'Carina Almeida', 'avaliacao': '', 'feita': '0'}
+            ],'avaliacaoFeitaFreelancer':[
+                {'id':'20','nome': 'Alina Doces', 'avaliacao': '', 'feita': '0'}
+            ],'na':'0'});
+        users.push({'id': 1, "nome": "Carina Almeida", "idade": 25, "genero": "feminino", "email": "carina@hotmail.com",
+            "nTelemovel": 111111111, "password": "login1", "regime": 'Parcial', 'area': 'geral', 'avaliacao': 1,
+            "propostasMandadas": [
+                {'id':'10','nome': 'Antonio Costa', 'salario': 250, 'inicio': '','fim': '','status':'Pendente'}
+            ],"propostasRecebidas": [
+                {'id':'01','nome': 'Antonio Costa', 'salario': 100, 'inicio': '','fim': '','status':'Aceito'}
+            ],'avaliacaoFeitaEmpregador':[],'avaliacaoFeitaFreelancer':[],'na':'0'});
+        users.push({'id': 2, "nome": "Alina Doces", "idade": 23, "genero": "feminino", "email": "alina@hotmail.com",
+            "nTelemovel": 111111111, "password": "login2","regime": 'Parcial', 'area': 'geral', 'avaliacao': 1,
+            "propostasMandadas": [
+                {'id':'20','nome': 'Antonio Costa', 'salario': 560, 'inicio': '','fim': '','status':'Aceito'}
+            ],"propostasRecebidas": [
+                {'id':'02','nome': 'Antonio Costa', 'salario': 200, 'inicio': '','fim': '','status':'Pendente'},
+            ],'avaliacaoFeitaEmpregador':[],'avaliacaoFeitaFreelancer':[],'na':'0'});
+    }
+    //var users = [];
+    localStorage.setItem("users", JSON.stringify(users));
+
+});
 (function ($) {
     "use strict";
 
@@ -11,7 +46,7 @@
             else {
                 $(this).removeClass('has-val');
             }
-        })    
+        })
     })
 
     /*==================================================================
@@ -34,7 +69,7 @@
 
     $('.validate-form .input100').each(function(){
         $(this).focus(function(){
-           hideValidate(this);
+            hideValidate(this);
         });
     });
 
@@ -62,7 +97,7 @@
 
         $(thisAlert).removeClass('alert-validate');
     }
-    
+
 
 })(jQuery);
 
@@ -79,9 +114,10 @@ verificarLogin = function() {
         console.log("Procurando utilizador...")
         for (var i = 0; i < users.length; i++){
             if (users[i]["email"] == userLogin.value && users[i]["password"] == passLogin.value) {
-                $("#alertBox").fadeOut()
+                $("#alertBox").fadeOut();
+                localStorage.setItem("currentUser", JSON.stringify(users[i]));
                 window.location.href = "interfaceUser.html";
-                return false;
+                return false
             }
         }
         $("#alertBox").fadeIn();

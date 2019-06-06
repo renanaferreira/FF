@@ -18,7 +18,7 @@ $( document ).ready(function() {
         var email = mail.value;
         var phoneNumb = numTel.value;
         var password = pass.value;
-        
+
         // Carregar utilizadores existentes
         var users = JSON.parse(localStorage.getItem("users") || "[]");
         console.log("# of users: " + users.length);
@@ -36,14 +36,16 @@ $( document ).ready(function() {
             "nTelemovel": phoneNumb,
             "password": password
         };
+        user['regime'] = 'parcial';user['area'] = 'geral';user['avaliacao'] = '1';user['propostasMandadas'] = [];
+        user["propostasRecebidas"] = [];
         users.push(user);
 
         // Guardar lista de utilizadores
         localStorage.setItem("users", JSON.stringify(users));
 
         window.location.href = "index.html";
-        alert("Registo efetuado.")
-        return false
+        alert("Registo efetuado.");
+        return false;
 
     }
 
