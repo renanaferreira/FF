@@ -11,133 +11,151 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
           integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link href="css/removeArrows.css" rel="stylesheet" media="all">
     <title>FF</title>
     <script src="js/interfaceUser.js"></script>
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#" style="font-family: 'Roboto Slab', serif;font-size:30px">F&F</a>
-            <ul class="navbar-nav" style="font-size: 20px">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">Pesquisa</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="mensagens.html">Mensagens</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="contratos.html">Contratos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="avaliacoes.html">Avaliações</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav justify-content-end">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                        <i class="fas fa-user fa-2x"></i>
-                    </a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="perfil.html">Perfil</a>
-                        <a class="dropdown-item" href="Contratos2.html">Trocar para Freelancer</a>
-                        <a class="dropdown-item" href="index.html">Log Out</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <div class="container" style="margin-top: 20px;">
-        <h1>Pesquisar Freelancers</h1>
-        <table class="table table-striped" data-bind="if: freelancers().length > 0">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Área</th>
-                <th>Regime</th>
-                <th>Avaliação</th>
-                <th>Fazer Proposta</th>
-            </tr>
-            </thead>
-            <tbody data-bind="foreach: freelancers">
-            <tr>
-                <td data-bind="text: id"></td>
-                <td data-bind="text: nome"></td>
-                <td data-bind="text: area"></td>
-                <td data-bind="text: regime"></td>
-                <td data-bind="text: avaliacao"></td>
-                <td><button class="btn btn-primary" data-bind="click: $parent.configurar"
-                            data-toggle="modal" data-target="#myModal2"><i class="fas fa-check"></i></button></td>
-                <td><button class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-bind="click: $parent.configurar"
-                ><i class="fas fa-envelope"></i></button></td>
-            </tr>
-            </tbody>
-        </table>
-        <div class="modal " id="myModal">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#" style="font-family: 'Roboto Slab', serif;font-size:30px">F&F</a>
+        <ul class="navbar-nav" style="font-size: 20px">
+            <li class="nav-item">
+                <a class="nav-link active" href="#">Pesquisa</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="mensagens.html">Mensagens</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="contratos.html">Contratos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="avaliacoes.html">Avaliações</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav justify-content-end">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    <i class="fas fa-user fa-2x"></i>
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="perfil.html">Perfil</a>
+                    <a class="dropdown-item" href="Contratos2.html">Trocar para Freelancer</a>
+                    <a class="dropdown-item" href="index.html">Log Out</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container" style="margin-top: 20px;">
+    <h1>Pesquisar Freelancers</h1>
+    <table class="table table-striped" data-bind="if: freelancers().length > 0">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Área</th>
+            <th>Regime</th>
+            <th>Avaliação</th>
+            <th>Fazer Proposta</th>
+        </tr>
+        </thead>
+        <tbody data-bind="foreach: freelancers">
+        <tr>
+            <td data-bind="text: id"></td>
+            <td data-bind="text: nome"></td>
+            <td data-bind="text: area"></td>
+            <td data-bind="text: regime"></td>
+            <td data-bind="text: avaliacao"></td>
+            <td><button class="btn btn-primary" data-bind="click: $parent.configurar"
+                        data-toggle="modal" data-target="#myModal2"><i class="fas fa-check"></i></button></td>
+            <td><button class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-bind="click: $parent.configurar"
+            ><i class="fas fa-envelope"></i></button></td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="modal " id="myModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
 
-                    <div class="modal-header">
-                        <h4 class="modal-title">Mandar mensagem a freelancer</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
+                <div class="modal-header">
+                    <h4 class="modal-title">Mandar mensagem a freelancer</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
 
 
-                    <div class="modal-body">
-                        <div class="input-group input-group-lg">
+                <div class="modal-body">
+                    <div class="input-group input-group-lg">
                             <textarea placeholder="Insira a mensagem que queres mandar" id="mensagem1"
                                       style="height: 200px" class="form-control"></textarea>
-                        </div>
                     </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary"
-                                data-dismiss="modal" data-bind="click: mensagem">Mandar</button>
-                    </div>
-
                 </div>
-            </div>
-        </div>
-        <div class="modal " id="myModal2">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
 
-                    <div class="modal-header">
-                        <h4 class="modal-title">Mandar Proposta</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-
-
-                    <div class="modal-body">
-                        <div class="input-group mb-3 input-group-lg">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Salário</span>
-                            </div>
-                            <input type="number" class="form-control" id="salario">
-                        </div>
-                        <div class="input-group mb-3 input-group-lg">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Inicio</span>
-                            </div>
-                            <input type="date" class="form-control" id="inicio">
-                        </div>
-                        <div class="input-group input-group-lg">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Fim</span>
-                            </div>
-                            <input type="date" class="form-control" id="final">
-                        </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary"
-                                data-dismiss="modal" data-bind="click: aceitar">Mandar</button>
-                    </div>
-
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary"
+                            data-dismiss="modal" data-bind="click: mensagem">Mandar</button>
                 </div>
+
             </div>
         </div>
     </div>
+    <div class="modal " id="myModal2">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header" style="color: white; background-color: #57b846">
+                    <h4 class="modal-title">Enviar Proposta</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <div class="modal-body">
+                    <h5>Dados Pessoais</h5>
+                    <div class="input-group mb-3 input-group-lg">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Localidade</span>
+                        </div>
+                        <input type="text" class="form-control" id="localidade">
+                    </div>
+                    <div class="input-group mb-3 input-group-lg">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Contacto</span>
+                        </div>
+                        <input type="number" class="form-control" id="contacto">
+                    </div>
+                    <h5>Termos</h5>
+                    <div class="input-group mb-3 input-group-lg">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Data de Inicio</span>
+                        </div>
+                        <input type="date" class="form-control" id="dataInicio">
+                    </div>
+                    <div class="input-group mb-3 input-group-lg">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Data de Término</span>
+                        </div>
+                        <input type="date" class="form-control" id="dataFinal">
+                    </div>
+                    <div class="input-group mb-3 input-group-lg">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Quantia Poposta (€)</span>
+                        </div>
+                        <input type="number" class="form-control quantity" id="salario">
+                    </div>
+                    <h5>Descrição</h5>
+                    <div>
+                        <textarea class="form-control" name="descricao" id="descricao" rows="5"></textarea>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary"
+                            data-dismiss="modal" data-bind="click: aceitar">Enviar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
