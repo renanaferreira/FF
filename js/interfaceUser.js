@@ -1,7 +1,6 @@
 $('document').ready(function(){
     var users = JSON.parse(localStorage.getItem("users") || "[]");
     var currentUser = JSON.parse(localStorage.getItem("currentUser"));
-    console.log(currentUser);
     var pesquisa = users;
     for(var i = 0; i < pesquisa.length; i++){
         if(pesquisa[i]['id'] == currentUser['id']){
@@ -10,21 +9,43 @@ $('document').ready(function(){
         }
 
     }
-    for(var i = 0; i < pesquisa.length; i++){
-        console.log(pesquisa[i]);
-    }
     function viewModel() {
         var self = this;
 
         self.freelancerCorrente = ko.observable({});
         self.freelancers = ko.observableArray(pesquisa);
 
-        self.aceitar = function(freelancer) {
+        self.aceitar = function() {
+            var freelancer = self.freelancerCorrente();
             var salario = $('#myModal2 #salario').val();
-            var inicio = new Date($('#myModal2 #inicio').val()).toDateString();
-            var final = new Date($('#myModal2 #final').val()).toDateString();
-            console.log(final);
+            var inicio = $('#myModal2 #dataInicio').val();
+            var final = $('#myModal2 #dataFinal').val();
+            var contrato = {'id': currentUser['id'] + freelancer['id'],'inicio': inicio,
+                            'fim': final, 'salario': salario, 'status': 'Pendente','nome': freelancer['nome']};
+            var contrato2 = contrato; contrato2['nome'] = currentUser['nome'];
+            currentUser['propostasMandadas'].push(contrato);
+            freelancer['propostasRecebidas'].push(contrato2);
+            localStorage.setItem("currentUser", JSON.stringify(currentUser));
+            for(var i = 0; i < users.length; i++){
+                if(users[i]['id'] == freelancer['id']){
+                    users[i] = freelancer;
+                }
+                if(users[i]['id'] == currentUser['id']){
+                    users[i] = currentUser;
+                }
+            }
+            pesquisa = users;
+            for(var i = 0; i < pesquisa.length; i++){
+                if(pesquisa[i]['id'] == currentUser['id']){
+                    pesquisa.splice(i,1);
+                    break;
+                }
 
+            }
+            self.freelancerCorrente(pesquisa);
+            for(var i = 0; i < pesquisa.length; i++){
+                console.log(pesquisa[i]);
+            }
         };
 
         self.mensagem = function(){
