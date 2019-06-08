@@ -17,6 +17,10 @@ $('document').ready(function(){
 
         self.aceitar = function() {
             users = JSON.parse(localStorage.getItem("users") || "[]");
+            for(var i = 0; i < pesquisa.length; i++){
+                console.log(users[i]);
+            }
+            console.log('');
             var freelancer = self.freelancerCorrente();
             var salario = $('#myModal2 #salario').val();
             var inicio = $('#myModal2 #dataInicio').val();
@@ -48,77 +52,6 @@ $('document').ready(function(){
             for(var i = 0; i < pesquisa.length; i++){
                 console.log(pesquisa[i]);
             }
-        };
-
-        self.mensagem = function(){
-
-            users = JSON.parse(localStorage.getItem("users") || "[]");
-            var mensag = $('#mensagem1').val();
-            var umai = {'nome': currentUser['nome'], 'msg': mensag};
-            var contem = false;
-            for(var i = 0; i < users.length; i++){
-                console.log(users[i]);
-            }
-            console.log('\n');
-            var chat = {};
-            for(var i = 0;i < users.length;i++){
-                for(var j = 0;j < users[i]['chats'].length;j++){
-                    if((users[i]['chats'][j]['id1'] == currentUser['id'] && users[i]['chats'][j]['id2'] == self.freelancerCorrente()['id']) ||
-                       (users[i]['chats'][j]['id2'] == currentUser['id'] && users[i]['chats'][j]['id1'] == self.freelancerCorrente()['id'])){
-                        contem = true;
-                        chat = users[i]['chats'][j];
-                        break;
-                    }
-                }
-            }
-            if(contem){
-                console.log('contem');
-                for(var i = 0;i < currentUser['chats'].length; i++){
-                    if(currentUser['chats'][i]['id1'] == chat['id1'] && currentUser['chats'][i]['id2'] == chat['id2']){
-                        currentUser['chats'][i]['mensagens'].push(umai);
-                        localStorage.setItem("currentUser", JSON.stringify(currentUser));
-                        break;
-                    }
-                }
-                for(var i = 0; i < users.length; i++){
-                    if(users[i]['id'] == chat['id2']){
-                        for(var j = 0; j < users[i]['chats'].length; j++){
-                            if(users[i]['chats'][j]['id2'] == chat['id1']){
-                                users[i]['chats'][j]['mensagens'].push(umai);
-                            }
-                        }
-                    }
-                    if(users[i]['id'] == currentUser['id']){
-                        users[i] = currentUser;
-                    }
-                }
-                localStorage.setItem("users", JSON.stringify(users));
-            }else{
-                console.log('nao contem');
-                var chatCU = {'receptor': self.freelancerCorrente()['nome'], 'id1': currentUser['id'], 'id2': self.freelancerCorrente()['id'],
-                              'mensagens':[]};
-                chatCU['mensagens'].push(umai);
-                currentUser['chats'].push(chatCU);
-                localStorage.setItem("currentUser", JSON.stringify(currentUser));
-                var chatF = {'receptor': currentUser['nome'], 'id1': self.freelancerCorrente()['id'], 'id2': currentUser['id'],
-                    'mensagens':[]};
-                chatF['mensagens'].push(umai);
-                for(var i = 0;i < users.length;i++){
-                    if(users[i]['id'] == currentUser['id']){
-                        users[i]['chats'].push(chatCU);
-                    }
-                    if(users[i]['id'] == self.freelancerCorrente()['id']){
-                        users[i]['chats'].push(chatF);
-                    }
-                }
-                localStorage.setItem("users", JSON.stringify(users));
-            }
-            for(var i = 0; i < users.length; i++){
-                console.log(users[i]);
-            }
-
-
-
         };
         self.configurar = function(freelancer){self.freelancerCorrente(freelancer);};
 

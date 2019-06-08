@@ -69,36 +69,9 @@
             <td data-bind="text: avaliacao"></td>
             <td><button class="btn btn-primary" data-bind="click: $parent.configurar"
                         data-toggle="modal" data-target="#myModal2"><i class="fas fa-check"></i></button></td>
-            <td><button class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-bind="click: $parent.configurar"
-            ><i class="fas fa-envelope"></i></button></td>
         </tr>
         </tbody>
     </table>
-    <div class="modal " id="myModal">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-
-                <div class="modal-header">
-                    <h4 class="modal-title">Mandar mensagem a freelancer</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-
-
-                <div class="modal-body">
-                    <div class="input-group input-group-lg">
-                            <textarea placeholder="Insira a mensagem que queres mandar" id="mensagem1"
-                                      style="height: 200px" class="form-control"></textarea>
-                    </div>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary"
-                            data-dismiss="modal" data-bind="click: mensagem">Mandar</button>
-                </div>
-
-            </div>
-        </div>
-    </div>
     <div class="modal " id="myModal2">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
