@@ -51,15 +51,14 @@
         <div data-bind="foreach: chats" id="accordion">
             <div class="card">
                 <div class="card-header">
-                    <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree" data-bind="text: nome">
+                    <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree" data-bind="text: receptor">
                     </a>
                 </div>
                 <div id="collapseThree" class="collapse" data-parent="#accordion">
                     <!-- ko foreach: mensagens -->
                     <div class="card-body" style="border-bottom: 1px solid black">
-                        <h5 data-bind="if: mensageiro == '1'">EU</h5>
-                        <h5 data-bind="if: mensageiro == '2'">ELE</h5>
-                        <span data-bind="text: mensagem"></span>
+                        <h5 data-bind="text: nome"></h5>
+                        <span data-bind="text: msg"></span>
                     </div>
                     <!-- /ko -->
                     <div class="input-group" style="margin: 2px" id="umai">

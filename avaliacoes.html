@@ -60,7 +60,6 @@
             </thead>
             <tbody data-bind="foreach: avaliacoesPendentes">
             <tr>
-                <td data-bind="text: id"></td>
                 <td data-bind="text: nome"></td>
                 <td>
                     <select id="avaliador">
@@ -80,14 +79,12 @@
         <table class="table table-striped" data-bind="if: avaliacoes().length > 0">
             <thead>
             <tr>
-                <th>ID</th>
                 <th>Nome</th>
                 <th>Avaliação</th>
             </tr>
             </thead>
             <tbody data-bind="foreach: avaliacoes">
             <tr>
-                <td data-bind="text: id"></td>
                 <td data-bind="text: nome"></td>
                 <td data-bind="text: avaliacao"></td>
             </tr>
