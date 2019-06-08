@@ -4,32 +4,44 @@ $('document').ready(function(){
         users.push({'id': 0, "nome": "Antonio Costa", "idade": 20, "genero": "masculino", "email": "antonio@hotmail.com",
             "nTelemovel": 111111111, "password": "login", "regime": 'Parcial', 'area': 'geral', 'avaliacao': 1,
             "propostasMandadas": [
-                {'id':'01','nome': 'Carina Almeida', 'salario': 100, 'inicio': '','fim': '','status':'Aceito'},
-                {'id':'02','nome': 'Alina Doces', 'salario': 200, 'inicio': '','fim': '','status':'Pendente'},
+                {'id1':'0','id2':'1','nome': 'Carina Almeida', 'salario': 100, 'inicio': '2019-01-01','fim': '2019-09-01','status':'Aceito'},
+                {'id1':'0','id2':'2','nome': 'Alina Doces', 'salario': 200, 'inicio': '2019-06-01','fim': '2019-06-30','status':'Pendente'},
             ],"propostasRecebidas": [
-                {'id':'10','nome': 'Carina Almeida', 'salario': 250, 'inicio': '','fim': '','status':'Pendente'},
-                {'id':'20','nome': 'Alina Doces', 'salario': 560, 'inicio': '','fim': '','status':'Aceito'}
+                {'id1':'1','id2':'0','nome': 'Carina Almeida', 'salario': 250, 'inicio': '2019-04-01','fim': '2020-01-01','status':'Pendente'},
+                {'id1':'2','id2':'0','nome': 'Alina Doces', 'salario': 560, 'inicio': '2020-01-01','fim': '2020-01-20','status':'Aceito'}
             ],'avaliacaoFeitaEmpregador':[
-                {'id':'01','nome': 'Carina Almeida', 'avaliacao': '', 'feita': '0'}
+                {'id1':'0','id2':'1','nome': 'Carina Almeida', 'avaliacao': '', 'feita': '0'}
             ],'avaliacaoFeitaFreelancer':[
-                {'id':'20','nome': 'Alina Doces', 'avaliacao': '', 'feita': '0'}
-            ],'na':'0'});
+                {'id1':'2','id2':'0','nome': 'Alina Doces', 'avaliacao': '', 'feita': '0'}
+            ],'na':'0', 'chats':[{'receptor':'Carina Almeida', 'id1':'0', 'id2':'1', 'mensagens': [
+                    {'nome': 'Antonio','msg':'ola, fiquei muito interessado no seu perfil. gostaria de ser cozinheira de uma festa' +
+                            'que estou a fazer?'},{'nome': "Carina",'msg':'estou sim, antonio :)'}]
+                    }]
+        });
         users.push({'id': 1, "nome": "Carina Almeida", "idade": 25, "genero": "feminino", "email": "carina@hotmail.com",
             "nTelemovel": 111111111, "password": "login1", "regime": 'Parcial', 'area': 'geral', 'avaliacao': 1,
             "propostasMandadas": [
-                {'id':'10','nome': 'Antonio Costa', 'salario': 250, 'inicio': '','fim': '','status':'Pendente'}
+                {'id1':'1','id2':'0','nome': 'Antonio Costa', 'salario': 250, 'inicio': '2019-04-01','fim': '2020-01-01','status':'Pendente'}
             ],"propostasRecebidas": [
-                {'id':'01','nome': 'Antonio Costa', 'salario': 100, 'inicio': '','fim': '','status':'Aceito'}
-            ],'avaliacaoFeitaEmpregador':[],'avaliacaoFeitaFreelancer':[],'na':'0'});
+                {'id1':'0','id2':'1','nome': 'Antonio Costa', 'salario': 100, 'inicio': '2019-01-01','fim': '2020-09-01','status':'Aceito'}
+            ],'avaliacaoFeitaEmpregador':[],'avaliacaoFeitaFreelancer':[],'na':'0','chats':[{'receptor':'Antonio Costa', 'id1':'1', 'id2':'0', 'mensagens': [
+                    {'nome': 'Antonio','msg':'ola, fiquei muito interessado no seu perfil. gostaria de ser cozinheira de uma festa' +
+                            'que estou a fazer?'},{'nome': "Carina",'msg':'estou sim, antonio :)'}]
+            }]});
         users.push({'id': 2, "nome": "Alina Doces", "idade": 23, "genero": "feminino", "email": "alina@hotmail.com",
             "nTelemovel": 111111111, "password": "login2","regime": 'Parcial', 'area': 'geral', 'avaliacao': 1,
             "propostasMandadas": [
-                {'id':'20','nome': 'Antonio Costa', 'salario': 560, 'inicio': '','fim': '','status':'Aceito'}
+                {'id1':'2','id2':'0','nome': 'Antonio Costa', 'salario': 560, 'inicio': '2020-01-01','fim': '2020-01-20','status':'Aceito'}
             ],"propostasRecebidas": [
-                {'id':'02','nome': 'Antonio Costa', 'salario': 200, 'inicio': '','fim': '','status':'Pendente'},
-            ],'avaliacaoFeitaEmpregador':[],'avaliacaoFeitaFreelancer':[],'na':'0'});
+                {'id1':'0','id2':'2','nome': 'Antonio Costa', 'salario': 200, 'inicio': '2019-06-01','fim': '2019-06-30','status':'Pendente'},
+            ],'avaliacaoFeitaEmpregador':[],'avaliacaoFeitaFreelancer':[],'na':'0','chats': []
+            });
     }
-    //var users = [];
+    //users = [];
+    for(var i = 0;i < users.length;i++){
+        console.log(users[i]);
+    }
+
     localStorage.setItem("users", JSON.stringify(users));
 
 });

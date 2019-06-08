@@ -20,12 +20,12 @@ $('document').ready(function(){
             var users = JSON.parse(localStorage.getItem("users") || "[]");
             for(var i = 0; i < users.length; i++){
                 for(var j = 0; j < users[i]['propostasMandadas'].length; j++){
-                    if(users[i]['propostasMandadas'][j]['id'] == contrato['id']){
+                    if(users[i]['propostasMandadas'][j]['id1'] == contrato['id1']){
                         users[i]['propostasMandadas'][j]['status'] = "Aceito";
                     }
                 }
                 for(var j = 0; j < users[i]['propostasRecebidas'].length; j++){
-                    if(users[i]['propostasRecebidas'][j]['id'] == contrato['id']){
+                    if(users[i]['propostasRecebidas'][j]['id2'] == contrato['id2']){
                         users[i]['propostasRecebidas'][j]['status'] = "Aceito";
                     }
                 }
@@ -62,12 +62,12 @@ $('document').ready(function(){
             var users = JSON.parse(localStorage.getItem("users") || "[]");
             for(var i = 0; i < users.length; i++){
                 for(var j = 0; j < users[i]['propostasMandadas'].length; j++){
-                    if(users[i]['propostasMandadas'][j]['id'] == contrato['id']){
+                    if(users[i]['propostasMandadas'][j]['id1'] == contrato['id1']){
                         users[i]['propostasMandadas'][j]['status'] = "Recusado";
                     }
                 }
                 for(var j = 0; j < users[i]['propostasRecebidas'].length; j++){
-                    if(users[i]['propostasRecebidas'][j]['id'] == contrato['id']){
+                    if(users[i]['propostasRecebidas'][j]['id2'] == contrato['id2']){
                         users[i]['propostasRecebidas'][j]['status'] = "Recusado";
                     }
                 }
